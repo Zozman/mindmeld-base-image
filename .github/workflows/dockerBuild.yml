@@ -30,7 +30,7 @@ jobs:
         id: name
         uses: ASzc/change-string-case-action@v2
         with:
-          string: ${{ env.GITHUB_REPOSITORY }}
+          string: ${{ github.repository }}
 
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v2
