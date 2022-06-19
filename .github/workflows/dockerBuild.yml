@@ -2,9 +2,13 @@
 #   builds it, and publishes it to GitHub Container Registry
 
 name: Docker Build
+# on:
+#  schedule:
+#    - cron:  '0 */24 * * *'
 on:
-  schedule:
-    - cron:  '0 */24 * * *'
+  push:
+    branches:
+      - master
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -19,7 +23,8 @@ jobs:
       - name: Checkout Mindmeld Repo
         uses: actions/checkout@v3
         with:
-          name: cisco/mindmeld
+          repository: cisco/mindmeld
+          path: mindmeld
       
       - name: Generate Image Name
         id: name
@@ -37,6 +42,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v3
         with:
+          working-directory: mindmeld/docker_containers/mindmeld_dep_docker/.
           push: true
           tags: |
             ghcr.io/${{ steps.name.outputs.lowercase }}:latest
