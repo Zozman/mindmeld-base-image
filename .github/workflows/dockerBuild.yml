@@ -2,13 +2,9 @@
 #   builds it, and publishes it to GitHub Container Registry
 
 name: Docker Build
-# on:
-#  schedule:
-#    - cron:  '0 */24 * * *'
 on:
-  push:
-    branches:
-      - master
+  schedule:
+    - cron:  '0 */24 * * *'
 jobs:
   build:
     runs-on: ubuntu-latest
